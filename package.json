@@ -1,0 +1,23 @@
+{
+  "name": "to-do-list",
+  "version": "1.0.0",
+  "description": "to-do list",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JagroopBagri/to-do-list.git"
+  },
+  "author": "Jagroop Bagri",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JagroopBagri/to-do-list/issues"
+  },
+  "homepage": "https://github.com/JagroopBagri/to-do-list#readme",
+  "devDependencies": {
+    "webpack": "^5.66.0",
+    "webpack-cli": "^4.9.1"
+  }
+}
