@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     color: #0f2950;
+    overflow: auto;
 }
 
 body{
@@ -25,16 +26,31 @@ body{
     gap: 5px;
 }
 .emptyHeader{
-    padding: 1em;
-    border-style: solid;
+    padding: 1rem;
+    border-style: none;
     height: 98%;
-    width: 25%;
+    width: 20%;
 }
 .welcomeMessage{
-    padding: 1em;
-    border-style: solid;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-style: none;
+    border-bottom-style: solid;
+    border-width: .18rem;
     height: 98%;
-    width: 65%;
+    width: 70%;
+    font-size: 3.5rem;
+    font-weight: bold;
+}
+.unfinished{
+    font-size: 1.1rem;
+    margin-left: 3px;
+    color: #138b8b;
+    font-weight: normal;
+    font-style: oblique;
 }
 #content{
     height: 75%;
@@ -44,41 +60,54 @@ body{
     gap: 5px;
 }
 .lists{
-    padding: 1em;
-    border-style: solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    border-style:solid;
+    border-width: .18rem;
+    border-radius: 2rem;
     height: 98%;
-    width: 25%;
+    width: 20%;
+}
+.listHeader{
+    font-size: 2rem;
 }
 .tasks{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     gap: 5px;
-    padding: 1em;
+    padding: 1rem;
     border-style: solid;
+    border-width: .18rem;
+    border-radius: 2rem;
     height: 98%;
-    width: 65%;
+    width: 70%;
     color: #0f2950;
 }
 .task{
+    padding-right: .3rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 5px;
     border-bottom-style: solid;
-    border-width: .1em;
+    border-width: .10rem;
     border-color: #0f2950;
 }
 .task-beginning{
+    font-size: 1rem;
+    border-style: solid;
     display: flex;
     align-items: center;
     gap: 10px;
-    width: 60%;
+    width: 65%;
 }
 .task-ending{
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     gap: 5px;
     width: 30%;
 }
@@ -86,17 +115,25 @@ body{
 /* Dot colors according to priority of task */
 .high{
     color: #da7968;
-    font-size: 2.3em;
+    font-size: 2.3rem;
 }
 .medium{
     color: #dfbb74;
-    font-size: 2.3em;
+    font-size: 2.3rem;
 }
 .low{
     color: #a2d192;
-    font-size: 2.3em;
+    font-size: 2.3rem;
 }
-.finished{
+.completed{
     color: #ced3d3;
-    font-size: 2.3em;
+    font-size: 2.3rem;
+}
+
+.del{
+    color: #da7968;
+    font-size: 1.1rem;
+}
+.edit{
+    font-size: 1.1rem;
 }
