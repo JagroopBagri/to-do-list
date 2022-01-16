@@ -2,8 +2,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    color: #0f2950;
-    overflow: auto;
+    color: #2053a0;
+    background-color: rgb(255, 255, 255);
 }
 
 body{
@@ -13,23 +13,31 @@ body{
     gap: 5px;
     height: 100vh;
     width: 100vw;
-    min-width: 800px;
+    min-width: 600px;
     min-height: 450px;
     overflow: auto;
 }
 
 #header{
     height: 20%;
-    width: 98%;
+    width: 100%;
     display: flex;
     justify-content: space-around;
     gap: 5px;
 }
-.emptyHeader{
+.buttonBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
     padding: 1rem;
     border-style: none;
     height: 98%;
     width: 20%;
+}
+.addList, .addTask{
+    width: 60%;
+    height: 30%;
 }
 .welcomeMessage{
     display: flex;
@@ -44,17 +52,18 @@ body{
     width: 70%;
     font-size: 3.5rem;
     font-weight: bold;
+    overflow: auto;
 }
 .unfinished{
     font-size: 1.1rem;
     margin-left: 3px;
-    color: #138b8b;
+    color: #56739e;
     font-weight: normal;
     font-style: oblique;
 }
 #content{
     height: 75%;
-    width: 98%;
+    width: 100%;
     display: flex;
     justify-content: space-around;
     gap: 5px;
@@ -62,21 +71,32 @@ body{
 .lists{
     display: flex;
     flex-direction: column;
-    align-items: center;
     padding: 1rem;
     border-style:solid;
     border-width: .18rem;
     border-radius: 2rem;
-    height: 98%;
+    border-color: #da7968;
+    height: 100%;
     width: 20%;
+    gap: 1.5rem;
+    overflow:auto;
 }
 .listHeader{
     font-size: 2.4rem;
     text-decoration: underline;
     text-decoration-thickness: .1rem;
+    height: 12%;
+    min-height: 3rem;
+    color: #da7968;
 }
 .list-item{
-    font-size: 1.2rem;
+    text-align: center;
+    color: #da7968;
+    font-size: 1.3rem;
+    min-height: 1.5rem;
+    margin: auto;
+    width: 90%;
+    overflow: auto;
 }
 .tasks{
     display: flex;
@@ -87,19 +107,23 @@ body{
     border-style: solid;
     border-width: .18rem;
     border-radius: 2rem;
-    height: 98%;
+    height: 100%;
     width: 70%;
-    color: #0f2950;
+    color: #2053a0;
 }
 .task{
+    padding-top: .1rem;
+    padding-bottom: .1rem;
     padding-right: .3rem;
+    min-height: 2.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 5px;
     border-bottom-style: solid;
     border-width: .10rem;
-    border-color: #0f2950;
+    border-color: #2053a0;
+    overflow: hidden;
 }
 .task-beginning{
     font-size: 1rem;
@@ -147,4 +171,83 @@ body{
 }
 .edit{
     font-size: 1.1rem;
+}
+/* Modal */
+.modal-container{
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0, 0.75);
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+}
+.modal-content{
+    max-width: 500px;
+    min-height: 300px;
+    width: 60%;
+    height: 80%;
+    background-color: #ffe2e0;
+    border-radius: 2rem;
+    border-style: solid;
+    border-color: #ffa59c;
+    border-width: .25rem;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    overflow: auto;
+}
+
+.task-input{
+    border-color: #ffa59c;
+    width: 80%;
+    height: 25%;
+    max-width: 300px;
+    min-height: 50px;
+    padding: .8rem;
+    resize: none;
+    border-radius: 10px;
+    color: #d85549;
+    font-size: 1rem;
+}
+label, select, input, textarea{
+    color: #d85549;
+    background-color: #fff7f7;
+}
+.modal-container label{
+    background-color: #ffe2e0;
+}
+
+.dueDate-input{
+    min-height: 40px;
+    border-radius: 5px;
+    border-color: #ffa59c;
+    border-style: solid;
+    color: #d85549;
+}
+#priority-input{
+    min-height: 30px;
+    border-radius: 5px;
+    border-color: #ffa59c;
+    color: #d85549;
+}
+.create-task, .cancel-task{
+    color: green;
+    margin-top: 20px;
+    height: 10%;
+    width: 30%;
+    border-radius: 10px;
+    min-height: 40px;
+    min-width: 50px;
+    border-color: green;
+    border-style: solid;
+    background-color: #fff7f7;
+}
+.cancel-task{
+    color: red;
+    border-color: red;
 }

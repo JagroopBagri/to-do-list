@@ -9,14 +9,38 @@
     <link rel='stylesheet' href='styles.css'>
 </head>
 <body>
+    <!-- Modal Section -->
+
+    <div class="modal-container">
+        <div class="modal-content">
+            <label for='task-input'>Task</label>
+            <textarea maxlength="144" type="text" id="task-input" name="task-input" class="task-input"></textarea>
+            <label for='dueDate-input'>Due Date</label>
+            <input type="date" id="dueDate-input" name="dueDate-input" class="dueDate-input">
+            <label for="priority-input">Priority</label>
+            <select name="priority-input" id="priority-input">
+                <option value="none">Select a priority</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+            </select>
+            <button class="create-task">Create Task</button>
+            <button class="cancel-task">Cancel</button>
+        </div>
+    </div>
+    <!-- End of Modal Section-->
     <div id='header'>
-        <div class='emptyHeader'></div>
+        <div class='buttonBox'>
+            <button class='addList'>Add List</button>
+            <button class='addTask'>Add Task</button>
+        </div>
         <div class='welcomeMessage'>Hello Jag ☺<br><span class='unfinished'>You have 5 tasks due today.</span></div>
     </div>
     <div id='content'>
         <div class='lists'>
-            <div class='listHeader'>Lists</div>
-            <div class='list-item' id='list1'>General</div>
+            <div class='list-item' id='list1'>General hfwhf</div>
+            <div class='list-item' id='list2'>Work</div>
+            <div class='list-item' id='list3'>Groceries</div>
         </div>
         <div class='tasks'>
             <div class='task list1-task1'>
@@ -25,7 +49,7 @@
                         <div class='high'>•</div>
                     </div>
                     <div class='item-content'>
-                        <div class='task-item'>insert random text here that will be a placeholder as an example of what happens when too much text is put in the task box. extra text extra text extra</div>
+                        <div class='task-item'>insert random text here that will be a placeholder as an example of what happens when too much text is put in the task box. yeah you with the h.</div>
                     </div>
                 </div>
                 <div class='task-ending'>
@@ -42,28 +66,6 @@
                     <div class='item-content'>
                         <div class='task-item'>Call the office</div>
                     </div>
-                </div>
-                <div class='task-ending'>
-                    <div class='edit'>✎</div>
-                    <div class='del'>✖</div>
-                    <div class='dueDate'>1//13/2022</div>
-                </div>
-            </div>
-            <div class='task list1-task3'>
-                <div class='task-beginning'>
-                    <div class='low'>•</div>
-                    <div class='task-item'>Call the office</div>
-                </div>
-                <div class='task-ending'>
-                    <div class='edit'>✎</div>
-                    <div class='del'>✖</div>
-                    <div class='dueDate'>1//13/2022</div>
-                </div>
-            </div>
-            <div class='task list1-task4'>
-                <div class='task-beginning'>
-                    <div class='completed'>•</div>
-                    <div class='task-item'>Call the office</div>
                 </div>
                 <div class='task-ending'>
                     <div class='edit'>✎</div>
