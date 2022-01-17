@@ -9,13 +9,13 @@ function makeTask(listNumber, number, text, priority, dueDate){
         dueDate
     }
 };
-// function that puts task in DOM
+// function that puts task in DOM 
 
-function domTask(task){
-    
-}
+function taskToDom(){
+    let taskText = document.querySelector('#task-input').value;
+    let taskPriority = document.querySelector('#priority-input').value;
+    let taskDueDate = document.querySelector('#dueDate-input').value;
 
-
-
+};
 
 export { makeTask };

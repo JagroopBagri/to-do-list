@@ -25,6 +25,9 @@ body{
     justify-content: space-around;
     gap: 5px;
 }
+button:hover{
+    cursor: pointer;
+}
 .buttonBox{
     display: flex;
     flex-direction: column;
@@ -172,8 +175,8 @@ body{
 .edit{
     font-size: 1.1rem;
 }
-/* Modal */
-.modal-container{
+/* Task Modal */
+.task-modal-container{
     width: 100%;
     height: 100%;
     background-color: rgb(0, 0, 0, 0.75);
@@ -183,8 +186,9 @@ body{
     justify-content: center;
     align-items: center;
     font-size: 1.3rem;
+    display: none;
 }
-.modal-content{
+.task-modal-content{
     max-width: 500px;
     min-height: 300px;
     width: 60%;
@@ -218,7 +222,7 @@ label, select, input, textarea{
     color: #d85549;
     background-color: #fff7f7;
 }
-.modal-container label{
+.task-modal-container label{
     background-color: #ffe2e0;
 }
 
@@ -229,6 +233,7 @@ label, select, input, textarea{
     border-style: solid;
     color: #d85549;
 }
+
 #priority-input{
     min-height: 30px;
     border-radius: 5px;
@@ -236,18 +241,81 @@ label, select, input, textarea{
     color: #d85549;
 }
 .create-task, .cancel-task{
-    color: green;
     margin-top: 20px;
     height: 10%;
     width: 30%;
     border-radius: 10px;
     min-height: 40px;
     min-width: 50px;
-    border-color: green;
     border-style: solid;
     background-color: #fff7f7;
 }
 .cancel-task{
     color: red;
     border-color: red;
+}
+.create-task{
+    color: green;
+    border-color: green;
+}
+/* List Modal */
+.list-modal-container{
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0, 0.75);
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+    display: none;
+}
+.list-modal-content{
+    max-width: 500px;
+    min-height: 300px;
+    width: 60%;
+    height: 45%;
+    background-color: #ffe2e0;
+    border-radius: 2rem;
+    border-style: solid;
+    border-color: #ffa59c;
+    border-width: .25rem;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    gap: 15px;
+    overflow: auto;
+}
+#list-name{
+    border-color: #ffa59c;
+    padding: .2rem;
+    border-radius: 10px;
+    color: #d85549;
+    border-style: solid;
+    text-align: center;
+    background-color: #fff7f7;
+    font-size: 1rem;
+}
+.list-modal-container label{
+    background-color: #ffe2e0;
+}
+.create-list, .cancel-list{
+    margin-top: 20px;
+    height: 10%;
+    width: 30%;
+    border-radius: 10px;
+    min-height: 40px;
+    min-width: 50px;
+    border-style: solid;
+    background-color: #fff7f7;
+}
+.cancel-list{
+    color: red;
+    border-color: red;
+}
+.create-list{
+    color: green;
+    border-color: green;
 }

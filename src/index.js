@@ -9,10 +9,12 @@ function operateApp(){
     let contentDiv = document.querySelector('#content');
     let listsDiv = document.querySelector('.lists');
     let tasksDiv = document.querySelector('.tasks');
-
-}
-
-// event listener function for add task button
-function addTask(){
-    
-}
+    addTaskButton.addEventListener('click', function(){
+        document.querySelector('.task-modal-container').style.display = 'flex';
+        let cancelButton = document.querySelector('.cancel-task');
+        cancelButton.addEventListener('click', function(){
+            document.querySelector('.task-modal-container').style.display = 'none';
+        })
+    })
+};
+operateApp();
