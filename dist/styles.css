@@ -31,7 +31,7 @@ button:hover{
 .buttonBox{
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     padding: 1rem;
     border-style: none;
@@ -39,8 +39,27 @@ button:hover{
     width: 20%;
 }
 .addList, .addTask{
-    width: 60%;
-    height: 30%;
+    font-size: .9rem;
+    width: 80%;
+    height: 40%;
+    max-width: 150px;
+    max-height: 40px;
+    color: rgb(144, 144, 255);
+    border-style: solid;
+    border-radius: 10px;
+    border-color: rgb(144, 144, 255);
+    transition: .4s;
+}
+.addList:hover, .addTask:hover{
+    font-size: .9rem;
+    width: 80%;
+    height: 40%;
+    max-width: 150px;
+    max-height: 40px;
+    color: white;
+    border-style: solid;
+    border-radius: 10px;
+    background-color: rgb(144, 144, 255);
 }
 .welcomeMessage{
     display: flex;
@@ -223,6 +242,8 @@ label, select, input, textarea{
     background-color: #fff7f7;
 }
 .task-modal-container label{
+    color: #c24b40;
+    font-size: 1.5rem;
     background-color: #ffe2e0;
 }
 
@@ -241,6 +262,7 @@ label, select, input, textarea{
     color: #d85549;
 }
 .create-task, .cancel-task{
+    font-size: 1rem;
     margin-top: 20px;
     height: 10%;
     width: 30%;
@@ -249,14 +271,25 @@ label, select, input, textarea{
     min-width: 50px;
     border-style: solid;
     background-color: #fff7f7;
+    transition: 0.4s;
 }
 .cancel-task{
     color: red;
     border-color: red;
 }
+.cancel-task:hover{
+    color: white;
+    border-color: red;
+    background-color: red;
+}
 .create-task{
     color: green;
     border-color: green;
+}
+.create-task:hover{
+    color: white;
+    border-color: green;
+    background-color: green;
 }
 /* List Modal */
 .list-modal-container{
@@ -299,9 +332,12 @@ label, select, input, textarea{
     font-size: 1rem;
 }
 .list-modal-container label{
+    color: #c24b40;
+    font-size: 1.5rem;
     background-color: #ffe2e0;
 }
 .create-list, .cancel-list{
+    font-size: 1rem;
     margin-top: 20px;
     height: 10%;
     width: 30%;
@@ -310,6 +346,7 @@ label, select, input, textarea{
     min-width: 50px;
     border-style: solid;
     background-color: #fff7f7;
+    transition: 0.4s;
 }
 .cancel-list{
     color: red;
@@ -318,4 +355,19 @@ label, select, input, textarea{
 .create-list{
     color: green;
     border-color: green;
+}
+.cancel-list:hover{
+    color: white;
+    border-color: red;
+    background-color: red;
+}
+.create-list:hover{
+    color: white;
+    border-color: green;
+    background-color: green;
+}
+.error{
+    font-size: 1.2rem;
+    color: red;
+    background-color: transparent;
 }
