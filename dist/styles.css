@@ -189,11 +189,15 @@ button:hover{
 
 .del{
     color: #da7968;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
 }
 .edit{
-    font-size: 1.1rem;
+    font-size: 1.2rem;
 }
+.del:hover, .edit:hover{
+    cursor: pointer;
+}
+
 /* Task Modal */
 .task-modal-container{
     width: 100%;
