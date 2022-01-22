@@ -77,7 +77,7 @@ button:hover{
     overflow: auto;
 }
 .unfinished{
-    font-size: 1.1rem;
+    font-size: 1.6rem;
     margin-left: 3px;
     color: #56739e;
     font-weight: normal;
@@ -111,6 +111,22 @@ button:hover{
     min-height: 3rem;
     color: #da7968;
 }
+.list-container{
+    height: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.del-list{
+    font-size: 2rem;
+    color: red;
+    transition: 0.5s;
+}
+.del-list:hover{
+    cursor: pointer;
+    font-size: 2.5rem;
+}
 .list-item{
     text-align: center;
     color: #da7968;
@@ -119,6 +135,12 @@ button:hover{
     margin: auto;
     width: 90%;
     overflow: auto;
+    transition: 0.4s;
+}
+.list-item:hover{
+    cursor: pointer;
+    color: #ffbf34;
+    font-size: 1.4rem;
 }
 .tasks{
     display: flex;
