@@ -71,14 +71,19 @@ export function updateListArray(myApp){
         // Increase current task number by one 
         myApp.listID++; 
         // Create new task and add it to the end of tasksArray
-        myApp.listsArray[myApp.listsArray.length] = makeList(myApp.listNameValue , myApp.listID); 
+        myApp.listsArray[myApp.listsArray.length] = makeList(myApp.listNameValue , myApp.listID);
+        // Add lists array to local storage
+        localStorage.setItem("listArray", JSON.stringify(myApp.listsArray)); 
         return 0;
     }
 };
 // Function that appends all tasks in myApp.TasksArray onto DOM
 export function refreshLists(myApp){
-    // delete all previous lists 
-    myApp.listsContainer.remove();
+    myApp.listsContainer = document.querySelector('.lists'); 
+    if(myApp.listsContainer){
+        // delete all previous lists 
+        myApp.listsContainer.remove();
+    }
     // create lists container again
     myApp.listsContainer = document.createElement('div');
     myApp.listsContainer.classList.add('lists');
@@ -125,9 +130,61 @@ export function addEventToListDelDivs(myApp){
         let individualListContainer = document.querySelector('#listcontainer' + delIdNumber);
         // Remove that task container from the DOM
         individualListContainer.remove();
+        // if list that was deleted was the current array that user was in then switch user to a different list
+        if(myApp.listsArray[arrayIndex].number === myApp.currentListNumber){
+            // Remove that task object from the Lists array
+            myApp.listsArray.splice(arrayIndex, 1);
+            // Add lists array to local storage
+            localStorage.setItem("listArray", JSON.stringify(myApp.listsArray)); 
+            // see if there is another available list to swtich to
+            if(myApp.listsArray.length != 0){
+                // select new current list number
+                myApp.currentListNumber = myApp.listsArray[myApp.listsArray.length -1].number;
+                // update list title that user is in
+                updateListTitle(myApp);
+                // refresh tasks on page to match that list
+                refreshTasks(myApp);
+                // add event listeners to del divs
+                addEventToDelDivs(myApp);
+                // add event listeners to edit divs
+                addEventToEditDivs(myApp)
+                return 0;
+            }
+            else{
+                myApp.currentListNumber = -1;
+                // update list title that user is in
+                updateListTitle(myApp);
+                // refresh tasks on page to match that list
+                refreshTasks(myApp);
+                // add event listeners to del divs
+            }
+        }
+        else {
         // Remove that task object from the Lists array
         myApp.listsArray.splice(arrayIndex, 1);
+        // Add lists array to local storage
+        localStorage.setItem("listArray", JSON.stringify(myApp.listsArray)); 
+        }
     };
+};
+// Function that updates current list name that user is in
+export function updateListTitle(myApp){
+    if(myApp.currentListNumber === -1){
+        (document.querySelector('.current-list-title')).textContent = 'Please select or make a list to add tasks';
+        return;
+    }
+    else{
+        // find list that matches current list number and changes list title to that list name
+        myApp.listsArray.forEach(list => {
+            if (list.number === myApp.currentListNumber){
+                (document.querySelector('.current-list-title')).textContent = list.name;
+                return 0;
+            }
+            else {
+                return 1;
+            }
+        })
+    }
 };
 // Function that adds Event Listener to all list items
 export function addEventToListItems(myApp){
@@ -144,6 +201,8 @@ export function addEventToListItems(myApp){
         let listNum = Number(this.id.replace(/[^0-9]/g,''));
         // Change current list number to match the list num of the list clicked
         myApp.currentListNumber = listNum;
+        // update list title that user is in
+        updateListTitle(myApp);
         // refresh tasks on page to match that list
         refreshTasks(myApp);
         // add event listeners to del divs

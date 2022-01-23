@@ -1,5 +1,5 @@
-import { showListModal, hideListModal, clearListModal, showListErrorMessage, removeListErrorMessage, retrieveListInput, updateListArray, refreshLists, addEventToListDelDivs, addEventToListItems } from "./lists";
-import {  retrieveTaskInput, updateTaskArray, refreshTasks, showTaskModal, hideTaskModal, clearTaskModal, removeErrorMessage, addEventToEditDivs, addEventToDelDivs} from "./tasks";
+import { showListModal, hideListModal, clearListModal, showListErrorMessage, removeListErrorMessage, retrieveListInput, updateListArray, refreshLists, addEventToListDelDivs, addEventToListItems, updateListTitle } from "./lists";
+import { retrieveTaskInput, updateTaskArray, refreshTasks, showTaskModal, hideTaskModal, clearTaskModal, removeErrorMessage, addEventToEditDivs, addEventToDelDivs} from "./tasks";
 
 // Main IIFE function that makes the whole application work
 (function operateApp(){
@@ -7,52 +7,111 @@ import {  retrieveTaskInput, updateTaskArray, refreshTasks, showTaskModal, hideT
     const myApp = {}; 
     // Function that creates variables storing DOM elements to be used by multiple functions
     function createStaticVariables(myApp){
-        // Stores all tasks 
-        myApp.tasksArray = []; 
-        // Stores all lists
-        myApp.listsArray = [];
+        // Stores all tasks. Set it to local storage if it exists
+        if(localStorage.getItem("taskArray")){
+            myApp.tasksArray = JSON.parse(localStorage.getItem("taskArray"));
+        }
+        else{
+            myApp.tasksArray = [{listNumber: 0,
+                number: 0,
+                text: 'Call the Office',
+                priority: 'high',
+                dueDate: '2022-01-13'}]; 
+        }
+        // Stores all lists. Set it to local storage if it exists
+        if(localStorage.getItem("listArray")){
+            myApp.listsArray = JSON.parse(localStorage.getItem("listArray"));
+        }
+        else{
+            myApp.listsArray = [{name: 'General', number: 0}];
+        }
         // Get array of all the lists in DOM
         myApp.listItems = Array.from(document.querySelectorAll('.list-item')); 
         // Get array of all the tasks in DOM
         myApp.taskItems = Array.from(document.querySelectorAll('.task')); 
-        // Current list number that the user is in
-        myApp.currentListNumber = 1;
+        // Current list number that the user is in. If no list exists the value is -1
+        if(myApp.listsArray.length === 0){
+            myApp.currentListNumber = -1;
+        }
+        else{
+        myApp.currentListNumber = myApp.listsArray[0].number;
+        }
         // Variable that records the number of tasks that have been created
-        myApp.taskID = (function(){
-            // Convert task IDs to only numbers (ex. change "task1" to "1")
-            let idNumberArray = myApp.taskItems.map(task => (task.id).replace(/[^0-9]/g,''));
-            // Get largest number from array
-            let largestNumber = idNumberArray.reduce((a, b) => {
-                if (b > a)(
-                    a = b
-                )
-                return a;
-            })
-            return Number(largestNumber);
-        })();
+        if(myApp.tasksArray.length === 0){
+            myApp.taskID = 0;
+        }
+        else{
+            myApp.taskID = (function(){
+                // Convert task IDs to only numbers (ex. change "task1" to "1")
+                let idNumberArray = myApp.tasksArray.map(task => task.number);
+                // Get largest number from array
+                let largestNumber = idNumberArray.reduce((a, b) => {
+                    if (b > a)(
+                        a = b
+                    )
+                    return a;
+                })
+                return Number(largestNumber);
+            })();
+        }
         // Variable that records the number of tasks that have been created
-        myApp.listID = (function(){
-            // Convert list IDs to only numbers (ex. change "list1" to "1")
-            let idNumberArray = myApp.listItems.map(list => (list.id).replace(/[^0-9]/g,''));
-            // Get largest number from array
-            let largestNumber = idNumberArray.reduce((a, b) => {
-                if (b > a)(
-                    a = b
-                )
-                return a;
-            })
-            return Number(largestNumber);
-        })();
+        if(myApp.listsArray.length === 0){
+            myApp.listID = 0;
+        }
+        else{
+            myApp.listID = (function(){
+                // Convert list IDs to only numbers (ex. change "list1" to "1")
+                let idNumberArray = myApp.listsArray.map(list => list.number);
+                // Get largest number from array
+                let largestNumber = idNumberArray.reduce((a, b) => {
+                    if (b > a)(
+                        a = b
+                    )
+                    return a;
+                })
+                return Number(largestNumber);
+            })();
+        }
         // Variable for 'Add Task' button
         myApp.addTaskButton = document.querySelector('.addTask');
         // Variable for 'Add List' button
         myApp.addListButton = document.querySelector('.addList');
+        // create local storage for tasks array if it doesn't already exist
+        if(localStorage.getItem("taskArray") === false){
+            localStorage.setItem("taskArray", JSON.stringify(myApp.tasksArray));
+        }
+        // create local storage for lists array if it doesn't already exist
+        if(localStorage.getItem("listArray") === false){
+            localStorage.setItem("listArray", JSON.stringify(myApp.listsArray));
+        }
         return 0;
     };
     // Invoke createStaticVariables Function
     createStaticVariables(myApp);
+    // update list title that user is in
+    updateListTitle(myApp);
+    // refresh tasks on page to match that list
+    refreshLists(myApp);
+    // add event listeners to del divs
+    addEventToListDelDivs(myApp);
+    // Add event listener to List items
+    addEventToListItems(myApp);
     // Add event listener to 'Add Task' button
+    refreshTasks(myApp);
+    // add event listeners to del divs
+    addEventToDelDivs(myApp);
+    // add event listeners to edit divs
+    addEventToEditDivs(myApp)
+    //hide List Modal
+    hideListModal();
+    //update Lists
     myApp.addTaskButton.addEventListener('click', function addTask(){
+        console.log(myApp.tasksArray);
+        // if no list is selected then you cannot use add task button
+        if(myApp.currentListNumber === -1){
+            alert('ERROR: Please select or add a list to add tasks');
+            return 1;
+        }
         // Clear Task Modal of previous values and inputs
         clearTaskModal();
         // Remove error message if applicable
@@ -122,22 +181,34 @@ import {  retrieveTaskInput, updateTaskArray, refreshTasks, showTaskModal, hideT
          createListButton.addEventListener('click', create);
          // Function for the 'Create List' button
          function create(){
-             retrieveListInput(myApp);
-             // Remove event listener from create List button and cancel button if creating new List is successful
-             if(updateListArray(myApp) === 0){
-             createListButton.removeEventListener('click', create);
-             cancelListButton.removeEventListener('click', cancel);
-             //hide List Modal
-             hideListModal();
-             //update Lists
-             refreshLists(myApp);
-             // add event listeners to del divs
-             addEventToListDelDivs(myApp);
-             // Add event listener to List items
+            retrieveListInput(myApp);
+            // Remove event listener from create List button and cancel button if creating new List is successful
+            if(updateListArray(myApp) === 0){
+            createListButton.removeEventListener('click', create);
+            cancelListButton.removeEventListener('click', cancel);
+            // If this is the only list then move user into that list automatically
+            if(myApp.listsArray.length === 1){
+                // Assign the current list number to the only list in the array
+                myApp.currentListNumber = myApp.listsArray[0].number;
+            }
+            // update list title that user is in
+            updateListTitle(myApp);
+            // refresh tasks on page to match that list
+            refreshTasks(myApp);
+            // add event listeners to del divs
+            addEventToDelDivs(myApp);
+            // add event listeners to edit divs
+            addEventToEditDivs(myApp)
+            //hide List Modal
+            hideListModal();
+            //update Lists
+            refreshLists(myApp);
+            // add event listeners to del divs
+            addEventToListDelDivs(myApp);
+            // Add event listener to List items
             addEventToListItems(myApp);
-             return 0;
-
-             }
+            return 0;
+            }
          }
     });
 })();

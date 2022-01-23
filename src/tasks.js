@@ -85,13 +85,18 @@ export function updateTaskArray(myApp){
         myApp.taskID++; 
         // Create new task and add it to the end of tasksArray
         myApp.tasksArray[myApp.tasksArray.length] = makeTask(myApp.currentListNumber, myApp.taskID, myApp.taskTextValue, myApp.taskPriorityValue, myApp.taskDueDateValue); 
+        // Add tasks array to local storage
+        localStorage.setItem("taskArray", JSON.stringify(myApp.tasksArray));
         return 0;
     }
 };
 // Function that appends all tasks in myApp.TasksArray onto DOM
 export function refreshTasks(myApp){
+    myApp.tasksContainer = document.querySelector('.tasks');
     // delete all previous tasks 
-    myApp.tasksContainer.remove();
+    if(myApp.tasksContainer){
+        myApp.tasksContainer.remove();
+    }
     // create tasks container again
     myApp.tasksContainer = document.createElement('div');
     myApp.tasksContainer.classList.add('tasks');
@@ -101,9 +106,7 @@ export function refreshTasks(myApp){
     myApp.contentContainer.appendChild(myApp.tasksContainer);
     myApp.tasksArray.forEach(task => {
         // check to see if task meets list number before appending to DOM
-        console.log(task.listNumber)
-        console.log(myApp.currentListNumber);
-        if(task.listNumber === myApp.currentListNumber && myApp.currentListNumber != 0){
+        if(task.listNumber === myApp.currentListNumber && myApp.currentListNumber != -1){
             // Create and append individual task div that goes into tasks div
             myApp.individualTaskContainer = document.createElement('div');
             myApp.individualTaskContainer.classList.add('list' + task.listNumber + '-task' + task.number);
@@ -181,6 +184,8 @@ export function addEventToDelDivs(myApp){
         individualTaskContainer.remove();
         // Remove that task object from the Tasks array
         myApp.tasksArray.splice(arrayIndex, 1);
+        // Add tasks array to local storage
+        localStorage.setItem("taskArray", JSON.stringify(myApp.tasksArray));
     };
 };
 // Function that adds Event Listener to all 'EDIT' Divs 
