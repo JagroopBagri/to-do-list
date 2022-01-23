@@ -130,6 +130,10 @@ export function addEventToListDelDivs(myApp){
         let individualListContainer = document.querySelector('#listcontainer' + delIdNumber);
         // Remove that task container from the DOM
         individualListContainer.remove();
+        // Delete all tasks that were in specified list
+        myApp.tasksArray = myApp.tasksArray.filter(task => task.listNumber != myApp.listsArray[arrayIndex].number);
+        // Add tasks array to local storage
+        localStorage.setItem("taskArray", JSON.stringify(myApp.tasksArray));
         // if list that was deleted was the current array that user was in then switch user to a different list
         if(myApp.listsArray[arrayIndex].number === myApp.currentListNumber){
             // Remove that task object from the Lists array

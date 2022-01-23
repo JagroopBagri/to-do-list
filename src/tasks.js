@@ -1,4 +1,4 @@
-
+import { format } from "../node_modules/date-fns"
 
 //Factory function that creates individual tasks 
 
@@ -154,7 +154,7 @@ export function refreshTasks(myApp){
             myApp.dueDiv = document.createElement('div');
             myApp.dueDiv.classList.add('dueDate');
             myApp.dueDiv.id = 'task-due' + task.number;
-            myApp.dueDiv.textContent = task.dueDate
+            myApp.dueDiv.textContent = format(new Date(task.dueDate), "P")
             myApp.taskEnding.appendChild(myApp.dueDiv);
             return 0;
         }
