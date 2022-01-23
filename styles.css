@@ -76,10 +76,10 @@ button:hover{
     font-weight: bold;
     overflow: auto;
 }
-.unfinished{
+.current-list-title{
     font-size: 1.6rem;
     margin-left: 3px;
-    color: #56739e;
+    color: #da7968;
     font-weight: normal;
     font-style: oblique;
 }
@@ -121,7 +121,8 @@ button:hover{
 .del-list{
     font-size: 2rem;
     color: red;
-    transition: 0.5s;
+    transition: 0.2s;
+    width: 30%;
 }
 .del-list:hover{
     cursor: pointer;
