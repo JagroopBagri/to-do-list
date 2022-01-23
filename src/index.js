@@ -211,4 +211,8 @@ import { retrieveTaskInput, updateTaskArray, refreshTasks, showTaskModal, hideTa
             }
          }
     });
+    // footer
+    const footer = document.querySelector('.footer')
+    const currentYear = new Date().getFullYear();
+    footer.textContent = 'Copyright © ' + currentYear + ' Jagroop Bagri'
 })();
